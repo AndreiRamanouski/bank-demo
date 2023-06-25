@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  axonserver:
+    image: axoniq/axonserver:latest
+    container_name: axon-container
+    restart: always
+    ports:
+      - '8024:8024'
+      - '8124:8124'
+    networks:
+      - spring-bank-net
+
+  mongo:
+    image: mongo
+    container_name: mongo-container
+    ports:
+      - "27017:27017"
+    restart: always
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+#      MONGO_INITDB_ROOT_PASSWORD: secret
+    networks:
+      - spring-bank-net
+    volumes:
+      - mongodb_data_container:/data/db
+
+  mysql:
+    image: mysql
+    container_name: mysql-container
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - spring-bank-net
+
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=mysql-container
+    restart: always
+    networks:
+      - spring-bank-net
+
+
+networks:
+  spring-bank-net:
+volumes:
+  mongodb_data_container:

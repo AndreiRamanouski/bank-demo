@@ -5,10 +5,16 @@ plugins {
 }
 
 group = 'com.springbank.user.core'
-version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = '17'
+}
+
+bootJar {
+    enabled = false
+}
+jar {
+    enabled = true
 }
 
 configurations {
@@ -24,12 +30,11 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.axonframework:axon-spring-boot-starter:4.7.3'
+    implementation 'org.axonframework.extensions.mongo:axon-mongo:4.7.0'
+//    compileOnly 'org.projectlombok:lombok'
+//    annotationProcessor 'org.projectlombok:lombok'
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
+//workaround intellij issue
+tasks.register("prepareKotlinBuildScriptModel"){}
