@@ -2,6 +2,7 @@ package com.springbank.user.core.usercore.configuration;
 
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
+import com.thoughtworks.xstream.XStream;
 import java.util.Collections;
 import org.axonframework.eventhandling.tokenstore.TokenStore;
 import org.axonframework.eventsourcing.eventstore.EmbeddedEventStore;
@@ -35,6 +36,12 @@ public class AxonConfig {
     @Value("${spring.data.mongodb.port:27017}")
     private int mongoPort;
 
+    @Bean
+    public XStream xStream() {
+        XStream xStream = new XStream();
+        xStream.allowTypesByWildcard(new String[] { "**" });
+        return xStream;
+    }
 
     @Bean
     public MongoClient mongo() {
