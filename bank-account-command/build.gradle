@@ -21,6 +21,7 @@ repositories {
 }
 
 dependencies {
+    implementation project(':bank-account-core')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.axonframework:axon-spring-boot-starter:4.7.3'
