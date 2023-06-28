@@ -22,8 +22,8 @@ services:
 #      MONGO_INITDB_ROOT_PASSWORD: secret
     networks:
       - spring-bank-net
-    volumes:
-      - mongodb_data_container:/data/db
+#    volumes:
+#      - mongodb_data_container:/data/db
 
   mysql:
     image: mysql
